@@ -5,6 +5,9 @@
 #include <string>
 #include <vector>
 
+#include "Monstre.h"
+#include "Personnage.h"
+
 //void lancer_combat(vector<Personnage> P, vector<Monstre> M);
 void test_combat();
 

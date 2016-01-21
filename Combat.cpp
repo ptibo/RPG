@@ -1,6 +1,8 @@
 
 #include "Combat.h"
 
+using namespace std;
+
 void test_combat(){
     Personnage Fanel("Fanel", HOMME, 9, 642);
     Monstre Magicarpe("Magicarpe", 1, 100, 11);

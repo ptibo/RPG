@@ -220,8 +220,7 @@ void Personnage::afficher_menu_sorts() const {
     string spell, type;
     char trash;
     ifstream f;
-    unsigned int niveau, mana;
-    int puissance;
+    unsigned int niveau, mana, puissance;
     f.open("Liste_Sorts.h");
     if (f){
         cout << "Liste des sorts : " << endl << endl;

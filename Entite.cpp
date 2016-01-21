@@ -17,12 +17,11 @@ Entite::Entite(const string nom, const unsigned int niveau, const unsigned int v
 {}
 
 void Entite::recevoirDegats(const unsigned int nbDegats){
-    m_vie -= nbDegats;
-    if (m_vie < 0){
+    if (m_vie < nbDegats){
         m_vie = 0;
     }
-    else if (m_vie > m_vie_max){
-        m_vie = m_vie_max;
+    else{
+        m_vie -= nbDegats;
     }
 }
 
@@ -31,13 +30,10 @@ void Entite::recevoirSoin(const unsigned int soin){
     if (m_vie > m_vie_max){
         m_vie = m_vie_max;
     }
-    else if (m_vie < 0){
-        m_vie = 0;
-    }
 }
 
 bool Entite::estVivant() const{
-    return m_vie > 0;
+    return m_vie != 0;
 }
 
 string Entite::get_nom() const{
