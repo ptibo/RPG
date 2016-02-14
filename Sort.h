@@ -1,10 +1,9 @@
 #ifndef DEF_SORT
 #define DEF_SORT
 
-#include <iostream>
-#include <fstream>
-#include <string>
+#include "Includes.h"
 
+#define NB_ELEMENTS 6
 enum type_sort {NIL, FEU, ELEC, VAPEUR, REPAIR, DESTR};
 
 class Sort

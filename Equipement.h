@@ -2,8 +2,7 @@
 #ifndef DEF_EQUIPEMENT
 #define DEF_EQUIPEMENT
 
-#include <iostream>
-#include <string>
+#include "Includes.h"
 
 #include "Objet.h"
 

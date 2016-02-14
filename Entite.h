@@ -2,9 +2,7 @@
 #ifndef DEF_ENTITE
 #define DEF_ENTITE
 
-#include <iostream>
-#include <string>
-#include <vector>
+#include "Includes.h"
 
 class Entite
 {

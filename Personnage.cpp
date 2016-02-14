@@ -193,74 +193,19 @@ void Personnage::changerEquipement(const type_objet typeNouvelEquipement, const 
 //Renvoie la quantité de cet objet dans l'inventaire (faux si absent) et sa position dans l'inventaire.
 //Si l'objet est absent de l'inventaire, indice_inv contient l'indice du premier emplacement libre.
 bool Personnage::possedeObjet(const string nomObjet, unsigned int *quantite_inv, unsigned int *indice_inv) const{
-    unsigned int i=0;
-    string nom_inv;
-    bool found=false;
-    while(i<m_inventaire.size() && !found){
-        nom_inv=m_inventaire[i].getNom();
-        if(nom_inv == nomObjet){
-            *quantite_inv=m_nb_inventaire[i];  //Si on trouve, on renvoie la quantité correspondante
-            *indice_inv=i;
-            found=true;
-        }
-        i++;
-    }
-    return found;
+    return m_inventaire.contient(nomObjet,quantite_inv,indice_inv);
 }
 
 // Ajouter un objet dans l'inventaire
 void Personnage::ajouterObjetInventaire(const std::string nomNouvelObjet, const type_objet typeNouvelObjet, const unsigned int quantite){
-    string line;
-    unsigned int quantite_inv, indice_inv;
-    bool ok;
-    ifstream f;
-    switch (typeNouvelObjet){ //Ouverture de la liste des equipements
-        case ARME : f.open("Liste_Armes.h"); break;
-        case COIFFE : f.open("Liste_Coiffes.h"); break;
-        case PLASTRON : f.open("Liste_Plastrons.h"); break;
-        case CAPE : f.open("Liste_Capes.h"); break;
-        case ANNEAU : f.open("Liste_Anneaux.h"); break;
-        case CEINTURE : f.open("Liste_Ceintures.h"); break;
-        case JAMBIERES : f.open("Liste_Jambieres.h"); break;
-        case CHAUSSURES : f.open("Liste_Chaussures.h"); break;
-        case RESSOURCE : f.open("Liste_Ressources.h"); break;
-        default : break;
-    }
-    if(f){
-        do{ //On cherche l'objet demandé
-            ok=getline(f,line);
-        }while(ok && line != nomNouvelObjet);
-        if(ok){ //si il existe, on l'ajoute dans l'inventaire
-            if(possedeObjet(nomNouvelObjet, &quantite_inv, &indice_inv)){
-                m_nb_inventaire[indice_inv]+=quantite;
-            }
-            else{
-                m_nb_inventaire.push_back(quantite);
-                m_inventaire.push_back(Objet(nomNouvelObjet,typeNouvelObjet));
-            }
-            cout << "Ajoute " << quantite << "x" << nomNouvelObjet << " dans l'inventaire de " << m_nom << "." << endl;
-        }
-    }
-    else cout << "ERROR while opening file" << endl;
-    f.close();
+    m_inventaire.ajouterObjet(nomNouvelObjet,typeNouvelObjet,quantite);
+    cout << "Ajoute " << quantite << "x" << nomNouvelObjet << " dans l'inventaire de " << m_nom << "." << endl;
 }
 
 // Supprimer un objet de l'inventaire
 void Personnage::supprimerObjetInventaire(const std::string nomObjet, const unsigned int quantite){
-    unsigned int indice_inv, quantite_inv;
-    cout << "Supprime ";
-    if(possedeObjet(nomObjet, &quantite_inv, &indice_inv)){
-        if(quantite_inv<=quantite){
-            m_nb_inventaire.erase(m_nb_inventaire.begin()+indice_inv);
-            m_inventaire.erase(m_inventaire.begin()+indice_inv);
-            cout << quantite_inv;
-        }
-        else{
-            m_nb_inventaire[indice_inv]-=quantite;
-            cout << quantite;
-        }
-        cout << "x" << nomObjet << " de l'inventaire de " << m_nom << "." << endl;
-    }
+    int n=m_inventaire.supprimerObjet(nomObjet,quantite);
+    cout << "Supprime" << n << "x" << nomObjet << " de l'inventaire de " << m_nom << "." << endl;
 }
 
 // Affiche les caractéristiques du personnage

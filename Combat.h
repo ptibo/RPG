@@ -1,9 +1,7 @@
 #ifndef DEF_COMBAT
 #define DEF_COMBAT
 
-#include <iostream>
-#include <string>
-#include <vector>
+#include "Includes.h"
 
 #include "Monstre.h"
 #include "Personnage.h"

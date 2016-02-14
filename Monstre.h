@@ -2,10 +2,7 @@
 #ifndef DEF_MONSTRE
 #define DEF_MONSTRE
 
-#include <iostream>
-#include <string>
-#include <cstdlib>
-#include <time.h>
+#include "Includes.h"
 
 #include "Entite.h"
 

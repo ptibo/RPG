@@ -2,8 +2,7 @@
 #ifndef DEF_ARME
 #define DEF_ARME
 
-#include <iostream>
-#include <string>
+#include "Includes.h"
 
 #include "Equipement.h"
 

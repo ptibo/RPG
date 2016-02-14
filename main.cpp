@@ -1,6 +1,3 @@
-#include <iostream>
-#include <string>
-#include <SFML/Audio.hpp>
 
 #include "Personnage.h"
 #include "Monstre.h"
@@ -45,48 +42,6 @@ void test_inventaire(){
     else cout << "> Pas de Coiffe trouvee !" << endl;
 }
 
-void test_sort(){
-    Personnage Fanel("Fanel", HOMME, 23, 666);
-    Monstre Slime("Slime", 4, 75, 23);
-    Fanel.afficherInfos();
-    cout << endl << endl << endl;
-    Fanel.afficherEtat();
-    cout << endl << endl << endl;
-    Slime.afficherEtat();
-    cout << endl << endl;
-    cout << endl << endl;
-    Fanel.utiliser_sort("Firaga",Slime);
-    cout << endl << endl;
-    Slime.afficherEtat();
-    cout << endl << endl;
-    Fanel.utiliser_sort("Fatale foudre",Slime);
-    cout << endl << endl;
-    Slime.afficherEtat();
-    cout << endl << endl;
-    Fanel.utiliser_sort("Speed-",Slime);
-    cout << endl << endl;
-    Slime.afficherEtat();
-    cout << endl << endl;
-    Fanel.utiliser_sort("Heal",Slime);
-    cout << endl << endl;
-    Slime.afficherEtat();
-    cout << endl << endl;
-    Fanel.utiliser_sort("Heal",Fanel);
-    Fanel.afficherEtat();
-    cout << endl << endl;
-    Slime.afficherEtat();
-    cout << endl << endl;
-    Fanel.utiliser_sort("Firaga",Fanel);
-    cout << endl << endl;
-    Slime.afficherEtat();
-    cout << endl << endl;
-    Fanel.utiliser_sort("Sabite",Slime);
-    cout << endl << endl;
-    Slime.afficherEtat();
-    cout << endl << endl;
-
-}
-
 int main()
 {
     sf::SoundBuffer buffer;
@@ -97,16 +52,9 @@ int main()
     sf::Sound sound;
     sound.setBuffer(buffer);
     sound.setLoop(true);
-    sound.play();
+    //sound.play();
+
+    test_combat();
     //test_inventaire();
-    //test_sort();
-    //test_combat();
-    vector<Entite *> personnages, monstres;
-    Personnage Fanel("Fanel", HOMME, 9, 642);
-    Monstre Magicarpe("Magicarpe", 1, 100, 11);
-    Fanel.changerEquipement(ARME, "Dague Cassee");
-    personnages.push_back(&Fanel);
-    monstres.push_back(&Magicarpe);
-    lancer_combat(personnages,monstres);
     return 0;
 }

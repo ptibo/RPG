@@ -2,20 +2,15 @@
 #ifndef DEF_PERSONNAGE
 #define DEF_PERSONNAGE
 
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <vector>
-
-#include "Equipement.h"
-#include "Arme.h"
-#include "Sort.h"
+#include "Includes.h"
 
 #include "Entite.h"
 #include "Monstre.h"
 
-#define TAILLE_INVENTAIRE 100
-#define NB_SORTS 5
+#include "Equipement.h"
+#include "Arme.h"
+#include "Sort.h"
+#include "Inventaire.h"
 
 enum Genre {HOMME, FEMME};
 
@@ -46,7 +41,7 @@ class Personnage : public Entite
     void ajouterObjetInventaire(const std::string nomNouvelObjet, const type_objet typeNouvelObjet, const unsigned int quantite); // Ajouter un objet dans l'inventaire
     void supprimerObjetInventaire(const std::string nomObjet, const unsigned int quantite);  // Supprimer un objet de l'inventaire
 
-    virtual void afficherEtat() const;          //Affiche les caractéristiques du personnage
+    virtual void afficherEtat() const;  //Affiche les caractéristiques du personnage
     void afficherInfos() const;         //Affiche les informations du personnage
     void afficher_menu_sorts() const;   //Affiche les sorts disponibles pour le personnage
 
@@ -61,11 +56,10 @@ class Personnage : public Entite
     Arme m_arme;
     Equipement m_coiffe, m_plastron, m_cape, m_anneau, m_ceinture, m_jambieres, m_chaussures;
 
-    int m_res_FEU, m_res_ELEC, m_res_DESTR;
     int m_dmg_FEU, m_dmg_ELEC, m_dmg_DESTR;
+    int m_res_FEU, m_res_ELEC, m_res_DESTR;
 
-    std::vector<Objet> m_inventaire;
-    std::vector<int> m_nb_inventaire;
+    Inventaire m_inventaire;
 };
 
 #endif

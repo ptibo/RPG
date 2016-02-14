@@ -2,9 +2,7 @@
 #ifndef DEF_OBJET
 #define DEF_OBJET
 
-#include <iostream>
-#include <string>
-#include <fstream>
+#include "Includes.h"
 
 // Un objet fait partie de ces catégories
 enum type_objet {NONE, RESSOURCE, ARME, COIFFE, PLASTRON, CAPE, ANNEAU, CEINTURE, JAMBIERES, CHAUSSURES};

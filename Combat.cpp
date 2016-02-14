@@ -30,6 +30,16 @@ void lancer_combat(vector<Entite *> & attaquants, vector<Entite *> & defenseurs)
 }
 
 void test_combat(){
+    vector<Entite *> personnages, monstres;
+    Personnage Fanel("Fanel", HOMME, 9, 642);
+    Monstre Magicarpe("Magicarpe", 1, 100, 11);
+    Fanel.changerEquipement(ARME, "Dague Cassee");
+    personnages.push_back(&Fanel);
+    monstres.push_back(&Magicarpe);
+    lancer_combat(personnages,monstres);
+}
+
+/*void test_combat(){
     Personnage Fanel("Fanel", HOMME, 9, 642);
     Monstre Magicarpe("Magicarpe", 1, 100, 11);
     string choice("Buanderie"),mag("Firaga"),cible("Pomme sur la tête du fils de Guillaume Tell");
@@ -102,4 +112,4 @@ void test_combat(){
     }
     cout << endl << endl;
     cout << "Merci d'avoir joue avec Fanel et Magicarpe-sensei *HUGS*" <<endl;
-}
+}*/
