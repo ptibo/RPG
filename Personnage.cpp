@@ -23,7 +23,7 @@ void Personnage::auto_attack(Entite &cible){
     if (!cible.estVivant()) cout << cible.get_nom() << " est mort !" << endl;
 }
 
-void Personnage::utiliser_sort(const string nomSort, Entite &cible){
+bool Personnage::utiliser_sort(const string nomSort, Entite &cible){
     Sort const leSort = Sort::recuperer_sort(nomSort);
     //On vérifie que le sort de nom nomSort existe bien et est défini
     if (leSort.get_type()!=NIL){
@@ -36,16 +36,89 @@ void Personnage::utiliser_sort(const string nomSort, Entite &cible){
             }
             cout << m_nom << " utilise " << leSort.get_nom() << " sur " << cible.get_nom() << " !" << endl;
             m_mana -= leSort.get_cout();
+            return true;
         }
         else{
             cout << m_nom << " tente d'utiliser " << leSort.get_nom() << " sur " << cible.get_nom() << " !" << endl;
             cout << "Pas assez de mana pour lancer ce sort !" << endl;
+            return false;
         }
     }
     else {
         cout << m_nom << " essaye d'utiliser :  " << leSort.get_nom() << " sur " << cible.get_nom() << "!" << endl;
         cout << "Le sort " << nomSort << " n'existe pas !" << endl;
+        return false;
     }
+}
+
+bool Personnage::jouer_tour(vector<Entite *> & allies, vector<Entite *> & ennemis){
+    string choix,choix_cible;
+    Entite *cible,*a,*e;
+    bool ok=false;
+    for(unsigned int i=0;i<ennemis.size();i++){
+        ennemis[i]->afficherEtat();
+        cout << endl;
+    }
+    for(unsigned int i=0;i<allies.size();i++){
+        allies[i]->afficherEtat();
+        cout << endl;
+    }
+    cout << "--> Tour de " << m_nom << " :" << endl;
+    cout << "Que faire ?" << endl << "S - Sort, A - Attaquer, F - Fuir" << endl;
+    while(!ok){
+        ok=true;
+        getline(cin,choix);
+        switch(choix[0]){
+            case 's':
+            case 'S':   afficher_menu_sorts();
+                        do{
+                            cout << "Sort a utiliser : ";
+                            cin >> choix;
+                            do{
+                                cout << "Cible : ";
+                                cin >> choix_cible;
+                                e=0;
+                                a=0;
+                                for(unsigned int i=0;i<ennemis.size();i++){
+                                    if(ennemis[i]->get_nom()==choix_cible) e=ennemis[i];
+                                }
+                                if(e==0){
+                                    for(unsigned int i=0;i<allies.size();i++){
+                                        if(allies[i]->get_nom()==choix_cible) a=allies[i];
+                                    }
+                                }
+                            }while(e==0 && a==0);
+                            if(e!=0) cible=e;
+                            else cible=a;
+                        }while(!utiliser_sort(choix,*cible));
+                        break;
+            case 'a':
+            case 'A':   cout << "Cible : ";
+                        do{
+                            cin >> choix_cible;
+                            e=0;
+                            a=0;
+                            for(unsigned int i=0;i<ennemis.size();i++){
+                                if(ennemis[i]->get_nom()==choix_cible) e=ennemis[i];
+                            }
+                            if(e==0){
+                                for(unsigned int i=0;i<allies.size();i++){
+                                    if(allies[i]->get_nom()==choix_cible) a=allies[i];
+                                }
+                            }
+                        }while(e==0 && a==0);
+                        if(e!=0) cible=e;
+                        else cible=a;
+                        auto_attack(*cible);
+                        break;
+            case 'f':
+            case 'F':   return true;
+                        break;
+            default:    ok=false;
+                        break;
+        }
+    }
+    return false;
 }
 
 void Personnage::boirePotionDeVie(const unsigned int quantitePotion){
@@ -178,13 +251,8 @@ void Personnage::supprimerObjetInventaire(const std::string nomObjet, const unsi
     cout << "Supprime ";
     if(possedeObjet(nomObjet, &quantite_inv, &indice_inv)){
         if(quantite_inv<=quantite){
-            while(indice_inv+1<m_inventaire.size()){
-                m_inventaire[indice_inv]=m_inventaire[indice_inv+1];
-                m_nb_inventaire[indice_inv]=m_nb_inventaire[indice_inv+1];
-                indice_inv++;
-            }
-            m_nb_inventaire.pop_back();
-            m_inventaire.pop_back();
+            m_nb_inventaire.erase(m_nb_inventaire.begin()+indice_inv);
+            m_inventaire.erase(m_inventaire.begin()+indice_inv);
             cout << quantite_inv;
         }
         else{

@@ -28,8 +28,10 @@ class Personnage : public Entite
     Personnage(const std::string nom, const Genre genre, const unsigned int niveau, const unsigned int XP);
 
     void auto_attack(Entite &cible);
-
-    void utiliser_sort(const std::string nomSort, Entite &cible);
+    //Utilise le sort nomSort sur cible. Renvoie vrai si tout s'est bien passé, faux sinon.
+    bool utiliser_sort(const std::string nomSort, Entite &cible);
+    //Fait jouer un tour de combat au personnage. Renvoie vrai si le personnage a pris la fuite.
+    virtual bool jouer_tour(std::vector<Entite *> & allies, std::vector<Entite *> & ennemis);
 
     void boirePotionDeVie(const unsigned int quantitePotion);
     void boirePotionMana(const unsigned int quantitePotion);
@@ -44,7 +46,7 @@ class Personnage : public Entite
     void ajouterObjetInventaire(const std::string nomNouvelObjet, const type_objet typeNouvelObjet, const unsigned int quantite); // Ajouter un objet dans l'inventaire
     void supprimerObjetInventaire(const std::string nomObjet, const unsigned int quantite);  // Supprimer un objet de l'inventaire
 
-    void afficherEtat() const;          //Affiche les caractéristiques du personnage
+    virtual void afficherEtat() const;          //Affiche les caractéristiques du personnage
     void afficherInfos() const;         //Affiche les informations du personnage
     void afficher_menu_sorts() const;   //Affiche les sorts disponibles pour le personnage
 

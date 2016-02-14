@@ -32,6 +32,17 @@ void Entite::recevoirSoin(const unsigned int soin){
     }
 }
 
+bool Entite::jouer_tour(vector<Entite *> & allies, vector<Entite *> & ennemis){
+    cout << "Impossible de jouer un tour pour une entite" << endl;
+    return true;
+}
+
+void Entite::afficherEtat() const{
+    cout << "Nom : " << m_nom << endl;
+    cout << "Niveau : " << m_niveau << endl;
+    cout << "Vie : " << m_vie << "/" << m_vie_max << endl;
+}
+
 bool Entite::estVivant() const{
     return m_vie != 0;
 }

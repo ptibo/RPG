@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 class Entite
 {
@@ -19,6 +20,9 @@ class Entite
 
     bool estVivant() const;
     std::string get_nom() const;
+
+    virtual bool jouer_tour(std::vector<Entite *> & allies, std::vector<Entite *> & ennemis);
+    virtual void afficherEtat() const;
 
     protected:
 

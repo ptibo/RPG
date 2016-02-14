@@ -100,6 +100,13 @@ int main()
     sound.play();
     //test_inventaire();
     //test_sort();
-    test_combat();
+    //test_combat();
+    vector<Entite *> personnages, monstres;
+    Personnage Fanel("Fanel", HOMME, 9, 642);
+    Monstre Magicarpe("Magicarpe", 1, 100, 11);
+    Fanel.changerEquipement(ARME, "Dague Cassee");
+    personnages.push_back(&Fanel);
+    monstres.push_back(&Magicarpe);
+    lancer_combat(personnages,monstres);
     return 0;
 }

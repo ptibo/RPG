@@ -8,7 +8,8 @@
 #include "Monstre.h"
 #include "Personnage.h"
 
-//void lancer_combat(vector<Personnage> P, vector<Monstre> M);
+bool equipe_morte(std::vector<Entite *> & equipe);
+void lancer_combat(std::vector<Entite *> & attaquants, std::vector<Entite *> & defenseurs);
 void test_combat();
 
 #endif

@@ -19,9 +19,10 @@ void Monstre::auto_attack(Entite &cible) const{
     if (!cible.estVivant()) cout << cible.get_nom() << " est mort !" << endl;
 }
 
-// Affiche les caractéristiques du Monstre
-void Monstre::afficherEtat() const{
-    cout << "Nom : " << m_nom << endl;
-    cout << "Niveau : " << m_niveau << endl;
-    cout << "Vie : " << m_vie << "/" << m_vie_max << endl;
+bool Monstre::jouer_tour(vector<Entite *> & allies, vector<Entite *> & ennemis){
+    srand(time(NULL));
+    int cible=rand()%ennemis.size();
+    while(!ennemis[cible]->estVivant()) cible+=cible%ennemis.size();
+    auto_attack(*(ennemis[cible]));
+    return false;
 }

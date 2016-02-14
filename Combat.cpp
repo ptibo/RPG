@@ -3,6 +3,32 @@
 
 using namespace std;
 
+bool equipe_morte(vector<Entite *> & equipe){
+    for(unsigned int i=0;i<equipe.size();i++){
+        if(equipe[i]->estVivant()) return false;
+    }
+    return true;
+}
+
+void lancer_combat(vector<Entite *> & attaquants, vector<Entite *> & defenseurs){
+    unsigned int n_att=0,n_def=0;
+    bool fin;
+    while(!fin && !equipe_morte(attaquants) && !equipe_morte(defenseurs)){
+        fin=attaquants[n_att]->jouer_tour(attaquants,defenseurs);
+        do{
+            n_att=(n_att+1)%attaquants.size();
+        }while(!attaquants[n_att]->estVivant());
+        cout << endl;
+        if(!fin && !equipe_morte(defenseurs) && !equipe_morte(attaquants)){
+            fin=defenseurs[n_def]->jouer_tour(defenseurs,attaquants);
+            do{
+                n_def=(n_def+1)%defenseurs.size();
+            }while(!defenseurs[n_def]->estVivant());
+            cout << endl;
+        }
+    }
+}
+
 void test_combat(){
     Personnage Fanel("Fanel", HOMME, 9, 642);
     Monstre Magicarpe("Magicarpe", 1, 100, 11);

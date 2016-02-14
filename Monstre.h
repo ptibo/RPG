@@ -4,6 +4,8 @@
 
 #include <iostream>
 #include <string>
+#include <cstdlib>
+#include <time.h>
 
 #include "Entite.h"
 
@@ -16,8 +18,7 @@ class Monstre : public Entite
     Monstre(const std::string nom, const unsigned int niveau, const unsigned int vie, const unsigned int degats);
 
     void auto_attack(Entite &cible) const;
-
-    void afficherEtat() const; //Affiche les caractéristiques du Monstre
+    virtual bool jouer_tour(std::vector<Entite *> & allies, std::vector<Entite *> & ennemis);
 
     private:
 
