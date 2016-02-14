@@ -26,4 +26,6 @@ class Arme : public Equipement
     unsigned int m_degats;
 };
 
+static Arme *Dague_Cassee=new Arme("Dague Cassee",1,42);
+
 #endif

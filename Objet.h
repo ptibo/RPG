@@ -21,6 +21,7 @@ class Objet
     void afficher_obj() const;
 
     std::string getNom() const;
+    type_objet get_type() const;
 
     protected:
 

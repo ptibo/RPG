@@ -36,3 +36,7 @@ void Objet::afficher_obj() const{
 string Objet::getNom() const{
     return m_nom;
 }
+
+type_objet Objet::get_type() const{
+    return m_type;
+}

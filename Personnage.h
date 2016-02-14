@@ -33,13 +33,13 @@ class Personnage : public Entite
 
     void gagnerXP(const unsigned int nbXP);
 
-    void changerEquipement(type_objet typeNouvelEquipement, std::string nomNouvelEquipement); // Changer ou équiper un nouvel objet
+    void changerEquipement(const Equipement *nouvelEquipement); // Changer ou équiper un nouvel objet
 
     //Renvoie la quantité de cet objet dans l'inventaire (0 si absent) et sa position dans l'inventaire.
     //Si l'objet est absent de l'inventaire, indice_inv contient l'indice du premier emplacement libre.
-    bool possedeObjet(const std::string nomObjet, unsigned int *quantite_inv, unsigned int *indice_inv) const;
-    void ajouterObjetInventaire(const std::string nomNouvelObjet, const type_objet typeNouvelObjet, const unsigned int quantite); // Ajouter un objet dans l'inventaire
-    void supprimerObjetInventaire(const std::string nomObjet, const unsigned int quantite);  // Supprimer un objet de l'inventaire
+    bool possedeObjet(const Objet *objet, unsigned int *quantite_inv, unsigned int *indice_inv) const;
+    void ajouterObjetInventaire(const Objet *nouvelObjet, const unsigned int quantite); // Ajouter un objet dans l'inventaire
+    void supprimerObjetInventaire(const Objet *objet, const unsigned int quantite);  // Supprimer un objet de l'inventaire
 
     virtual void afficherEtat() const;  //Affiche les caractéristiques du personnage
     void afficherInfos() const;         //Affiche les informations du personnage
@@ -53,8 +53,8 @@ class Personnage : public Entite
     unsigned int m_XP;
     Genre m_genre;
 
-    Arme m_arme;
-    Equipement m_coiffe, m_plastron, m_cape, m_anneau, m_ceinture, m_jambieres, m_chaussures;
+    Arme *m_arme;
+    Equipement *m_coiffe, *m_plastron, *m_cape, *m_anneau, *m_ceinture, *m_jambieres, *m_chaussures;
 
     int m_dmg_FEU, m_dmg_ELEC, m_dmg_DESTR;
     int m_res_FEU, m_res_ELEC, m_res_DESTR;

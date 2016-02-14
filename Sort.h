@@ -3,6 +3,7 @@
 
 #include "Includes.h"
 
+#define NB_SORTS 5
 #define NB_ELEMENTS 6
 enum type_sort {NIL, FEU, ELEC, VAPEUR, REPAIR, DESTR};
 
@@ -33,5 +34,7 @@ class Sort
     unsigned int m_puissance;
     unsigned int m_cout;
 };
-
+static Sort Sorts[NB_SORTS]={
+    Sort("Firaga",FEU,1,13,15),Sort("Fatale Foudre",ELEC,1,15,18),Sort("Speed-",VAPEUR,1,0,0),Sort("Heal",REPAIR,1,40,14),Sort("Devisse Boulon",DESTR,1,80,50)
+};
 #endif

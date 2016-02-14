@@ -20,3 +20,8 @@ void Equipement::afficher_equip() const{
     afficher_obj();
     cout << "(Niv." << m_niveau << ")" << endl;
 }
+
+
+unsigned int Equipement::get_niveau() const{
+    return m_niveau;
+}
